@@ -52,10 +52,10 @@ async def myplan(client, message):
     data = await plans_db.check_premium(user_id)  
     if data and data.get("expire_date"):
         expiry = data.get("expire_date")
-        expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
-        expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
+        expiry_ist = expiry.astimezone(pytz.timezone("Asia/perak"))
+        expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/perak")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
         
-        current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+        current_time = datetime.datetime.now(pytz.timezone("Asia/perak"))
         time_left = expiry_ist - current_time
             
         
@@ -159,7 +159,7 @@ async def transfer_premium(client, message):
                 f"👤 **From:** {sender_user.mention}\n"
                 f"👤 **To:** {new_user.mention}\n"
                 f"⏳ **Expiry Date:** {expiry_str_in_ist}\n\n"
-                f"__Powered by Team SPY__ 🚀"
+                f"__Powered by Team spy__ 🚀"
             )
             
             # Notification to the new user
