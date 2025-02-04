@@ -79,10 +79,10 @@ async def get_premium(client, message):
         data = await plans_db.check_premium(user_id)  
         if data and data.get("expire_date"):
             expiry = data.get("expire_date") 
-            expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
-            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
+            expiry_ist = expiry.astimezone(pytz.timezone("Asia/perak"))
+            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/perak")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
             
-            current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+            current_time = datetime.datetime.now(pytz.timezone("Asia/perak"))
             time_left = expiry_ist - current_time
             
             
@@ -102,7 +102,7 @@ async def get_premium(client, message):
 @app.on_message(filters.command("add") & filters.user(OWNER_ID))
 async def give_premium_cmd_handler(client, message):
     if len(message.command) == 4:
-        time_zone = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+        time_zone = datetime.datetime.now(pytz.timezone("Asia/perak"))
         current_time = time_zone.strftime("%d-%m-%Y\n⏱️ ᴊᴏɪɴɪɴɢ ᴛɪᴍᴇ : %I:%M:%S %p") 
         user_id = int(message.command[1])
         user = await client.get_users(user_id)
@@ -113,8 +113,8 @@ async def give_premium_cmd_handler(client, message):
             await plans_db.add_premium(user_id, expiry_time)  
             data = await plans_db.check_premium(user_id)
             expiry = data.get("expire_date")   
-            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")         
-            await message.reply_text(f"ᴘʀᴇᴍɪᴜᴍ ᴀᴅᴅᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ✅\n\n👤 ᴜꜱᴇʀ : {user.mention}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇꜱꜱ : <code>{time}</code>\n\n⏳ ᴊᴏɪɴɪɴɢ ᴅᴀᴛᴇ : {current_time}\n\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist} \n\n__**Powered by Team SPY__**", disable_web_page_preview=True)
+            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/perak")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")         
+            await message.reply_text(f"ᴘʀᴇᴍɪᴜᴍ ᴀᴅᴅᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ✅\n\n👤 ᴜꜱᴇʀ : {user.mention}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇꜱꜱ : <code>{time}</code>\n\n⏳ ᴊᴏɪɴɪɴɢ ᴅᴀᴛᴇ : {current_time}\n\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist} \n\n__**Powered by Team rez__**", disable_web_page_preview=True)
             await client.send_message(
                 chat_id=user_id,
                 text=f"👋 ʜᴇʏ {user.mention},\nᴛʜᴀɴᴋ ʏᴏᴜ ꜰᴏʀ ᴘᴜʀᴄʜᴀꜱɪɴɢ ᴘʀᴇᴍɪᴜᴍ.\nᴇɴᴊᴏʏ !! ✨🎉\n\n⏰ ᴘʀᴇᴍɪᴜᴍ ᴀᴄᴄᴇꜱꜱ : <code>{time}</code>\n⏳ ᴊᴏɪɴɪɴɢ ᴅᴀᴛᴇ : {current_time}\n\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}", disable_web_page_preview=True              
@@ -147,10 +147,10 @@ async def transfer_premium(client, message):
             await plans_db.add_premium(new_user_id, expiry)
             
             # Convert expiry date to IST format for display
-            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime(
+            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/perak")).strftime(
                 "%d-%m-%Y\n⏱️ **Expiry Time:** %I:%M:%S %p"
             )
-            time_zone = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+            time_zone = datetime.datetime.now(pytz.timezone("Asia/perak"))
             current_time = time_zone.strftime("%d-%m-%Y\n⏱️ **Transfer Time:** %I:%M:%S %p")
             
             # Confirmation message to the sender
@@ -196,7 +196,7 @@ async def premium_remover():
                 if expiry_date <= datetime.datetime.now():
                     name = user.first_name
                     await plans_db.remove_premium(user_id)
-                    await app.send_message(user_id, text=f"Hello {name}, your premium subscription has expired.")
+                    await app.send_message(user_id, text=f"hai {name}, your premium subscription has expired.")
                     print(f"{name}, your premium subscription has expired.")
                     removed_users.append(f"{name} ({user_id})")
                 else:
